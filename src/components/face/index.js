@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import Eyes from './eyes';
 import Mouth from './mouth';
 
-console.log(arc);
-const width = 960;
+console.log(window.innerWidth);
+const width = window.innerWidth;
 const height = 500;
 const centerX = width / 2;
 const centerY = height / 2;
