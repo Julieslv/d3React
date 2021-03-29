@@ -30,7 +30,7 @@ const PieArc = () => {
 		return (
 			<svg width={width} height={height}>
 				<g transform={`translate(${centerX}, ${centerY})`}>
-					{/* 					{data.map((d, i) => (
+					{data.map((d, i) => (
 						<path
 							fill={d['RGB hex value']}
 							key={i}
@@ -39,7 +39,7 @@ const PieArc = () => {
 								endAngle: ((i + 1) / data.length) * 2 * Math.PI,
 							})}
 						/>
-					))} */}
+					))}
 				</g>
 			</svg>
 		);
