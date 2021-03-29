@@ -13,9 +13,9 @@ const dataUrl =
 	'https://gist.githubusercontent.com/curran/b236990081a24761f7000567094914e0/raw/acd2b8cecfe51c520622fbaf407ee88b8796bfc6/cssNamedColors.csv';
 
 d3.csv(dataUrl).then(data => {
-	console.log(`${Math.round(d3.csvFormat(data).length / 1024)}kb`);
-	console.log(`${data.length} rows`);
-	console.log(`${data.columns.length} coloums`);
+	// console.log(`${Math.round(d3.csvFormat(data).length / 1024)}kb`);
+	// console.log(`${data.length} rows`);
+	// console.log(`${data.columns.length} coloums`);
 });
 
 /* FetchData(dataUrl).then(text => {

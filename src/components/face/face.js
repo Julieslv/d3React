@@ -1,11 +1,10 @@
 import React from 'react';
-import { arc } from 'd3';
 import styled from 'styled-components';
 
 import Eyes from './eyes';
 import Mouth from './mouth';
 
-console.log(window.innerWidth);
+// console.log(window.innerWidth);
 const width = window.innerWidth;
 const height = 500;
 const centerX = width / 2;
