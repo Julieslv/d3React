@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import * as d3 from 'd3';
 
 import styled from 'styled-components';
-const dataUrl =
-	'https://gist.githubusercontent.com/curran/b236990081a24761f7000567094914e0/raw/acd2b8cecfe51c520622fbaf407ee88b8796bfc6/cssNamedColors.csv';
+const dataUrl = '/assets/data/cssNamedColors.csv';
+
+console.log(process.env);
 
 const PieArc = () => {
 	const [data, setData] = useState(null);
@@ -29,16 +30,9 @@ const PieArc = () => {
 	if (data)
 		return (
 			<svg width={width} height={height}>
-				<g transform={`translate(${centerX}, ${centerY})`}>
-					{data.map((d, i) => (
-						<path
-							fill={d['RGB hex value']}
-							key={i}
-							d={dataArc({
-								startAngle: (i / data.length) * 2 * Math.PI,
-								endAngle: ((i + 1) / data.length) * 2 * Math.PI,
-							})}
-						/>
+				<g transform={`translate(${centerX},${centerY})`}>
+					{colorPie(data).map(d => (
+						<path fill={d.data['RGB hex value']} d={dataArc(d)} />
 					))}
 				</g>
 			</svg>
