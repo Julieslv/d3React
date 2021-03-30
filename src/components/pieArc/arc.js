@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import * as d3 from 'd3';
+import Loading from '../loading/loading';
 
-import styled from 'styled-components';
+// import styled from 'styled-components';
 const dataUrl = '/assets/data/cssNamedColors.csv';
 
 console.log(process.env);
@@ -37,34 +38,34 @@ const PieArc = () => {
 				</g>
 			</svg>
 		);
-	if (!data) return <DotCarousel className='dot-carousel'></DotCarousel>;
+	if (!data) return <Loading />;
 };
 
-const DotCarousel = styled.div`
-	position: relative;
-	left: -9999px;
-	width: 10px;
-	height: 10px;
-	border-radius: 50%;
-	background-color: #9880ff;
-	color: #9880ff;
-	box-shadow: 9984px 0 0 0 #9880ff, 9999px 0 0 0 #9880ff, 10014px 0 0 0 #9880ff;
-	animation: dotCarousel 1.5s infinite linear;
+// const DotCarousel = styled.div`
+// 	position: relative;
+// 	left: -9999px;
+// 	width: 10px;
+// 	height: 10px;
+// 	border-radius: 50%;
+// 	background-color: #9880ff;
+// 	color: #9880ff;
+// 	box-shadow: 9984px 0 0 0 #9880ff, 9999px 0 0 0 #9880ff, 10014px 0 0 0 #9880ff;
+// 	animation: dotCarousel 1.5s infinite linear;
 
-	@keyframes dotCarousel {
-		0% {
-			box-shadow: 9984px 0 0 -1px #9880ff, 9999px 0 0 1px #9880ff,
-				10014px 0 0 -1px #9880ff;
-		}
-		50% {
-			box-shadow: 10014px 0 0 -1px #9880ff, 9984px 0 0 -1px #9880ff,
-				9999px 0 0 1px #9880ff;
-		}
-		100% {
-			box-shadow: 9999px 0 0 1px #9880ff, 10014px 0 0 -1px #9880ff,
-				9984px 0 0 -1px #9880ff;
-		}
-	}
-`;
+// 	@keyframes dotCarousel {
+// 		0% {
+// 			box-shadow: 9984px 0 0 -1px #9880ff, 9999px 0 0 1px #9880ff,
+// 				10014px 0 0 -1px #9880ff;
+// 		}
+// 		50% {
+// 			box-shadow: 10014px 0 0 -1px #9880ff, 9984px 0 0 -1px #9880ff,
+// 				9999px 0 0 1px #9880ff;
+// 		}
+// 		100% {
+// 			box-shadow: 9999px 0 0 1px #9880ff, 10014px 0 0 -1px #9880ff,
+// 				9984px 0 0 -1px #9880ff;
+// 		}
+// 	}
+// `;
 
 export default PieArc;

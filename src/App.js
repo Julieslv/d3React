@@ -1,15 +1,17 @@
 import React from 'react';
 
-import PieArc from './components/pieArc/arc';
-import Face from './components/face/face';
-import Load from './components/loadeDataExample/dataExample';
+// import PieArc from './components/pieArc/arc';
+// import Face from './components/face/face';
+// import Load from './components/loadeDataExample/dataExample';
+import BarChart from './components/barChart/barChart';
 
 import styled from 'styled-components';
 
 const App = () => {
 	return (
 		<PageEl>
-			<PieArc />
+			<BarChart />
+			{/* <PieArc /> */}
 			{/* <Load /> */}
 			{/* <Face /> */}
 		</PageEl>
