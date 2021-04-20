@@ -1,11 +1,18 @@
+import styled from 'styled-components';
+
 export const AxisLeft = ({ yScale, margin }) =>
 	yScale.domain().map(domainValue => (
 		<g transform={`translate(0 ,${yScale(domainValue)})`}>
-			<text
+			<TextEl
 				x={-margin.right}
 				style={{ textAnchor: 'end' }}
 				dy={yScale.bandwidth() / 2}>
 				{domainValue}
-			</text>
+			</TextEl>
 		</g>
 	));
+
+const TextEl = styled.text`
+	fill: rgba(155, 0, 0, 0.4);
+	font-size: 0.875em;
+`;

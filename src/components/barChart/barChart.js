@@ -1,6 +1,7 @@
 import React from 'react';
 import * as d3 from 'd3';
 import Loading from '../loading/loading';
+import styled from 'styled-components';
 
 import { useData } from './useData';
 import { AxisBottom } from './axisBottom';
@@ -29,7 +30,7 @@ const BarChart = () => {
 	const margin = {
 		top: 20,
 		right: 20,
-		bottom: 20,
+		bottom: 90,
 		left: 200,
 	};
 
@@ -39,7 +40,8 @@ const BarChart = () => {
 	const yScale = d3
 		.scaleBand()
 		.domain(data.map(d => yAccessor(d)))
-		.range([0, innerHeight]);
+		.range([0, innerHeight])
+		.paddingInner(0.1);
 
 	const xScale = d3
 		.scaleLinear()
@@ -67,9 +69,22 @@ const BarChart = () => {
 					keyAccessor={keyAccessor}
 					barFillColour={barFillColour}
 				/>
+				<TextEl
+					x={innerWidth / 2}
+					y={innerHeight + margin.bottom}
+					textAnchor='middle'>
+					Population
+				</TextEl>
 			</g>
 		</svg>
 	);
 };
+
+const TextEl = styled.text`
+	fill: rgba(155, 0, 0, 0.2);
+	font-size: 2em;
+	font-weight: 700;
+	transform: translateY(-0.75em);
+`;
 
 export default BarChart;
