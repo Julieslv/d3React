@@ -1,54 +1,73 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import * as d3 from 'd3';
 import Loading from '../loading/loading';
 
-// console.log(d3);
-const dataUrl =
-	'https://gist.githubusercontent.com/curran/0ac4077c7fc6390f5dd33bf5c06cb5ff/raw/605c54080c7a93a417a3cea93fd52e7550e76500/UN_Population_2019.csv';
-const BarChart = () => {
-	const [data, setData] = useState(null);
+import { useData } from './useData';
+import { AxisBottom } from './axisBottom';
+import { AxisLeft } from './axisLeft';
 
-	useEffect(() => {
-		const newRow = d => {
-			d.Population = +d['2020'];
-			return d;
-		};
-		d3.csv(dataUrl, newRow).then(data => {
-			// pass in the data to setData and slice at 10 i.e. top 10
-			setData(data.slice(0, 10));
-		});
-	}, []);
+import { Bars } from './bars';
+
+// console.log(d3);
+const BarChart = () => {
+	const xAccessor = d => d.Population;
+	const yAccessor = d => d.Country;
+	const keyAccessor = d => d['Country code'];
+
+	const data = useData(xAccessor);
 
 	if (!data) {
 		return <Loading />;
 	}
 
-	console.log(data[0]);
+	// console.log(data[0]);
+	const gridStrokeColour = '#00000035';
+	const barFillColour = '#ff000065';
 
 	const width = window.innerWidth;
 	const height = 500;
+	const margin = {
+		top: 20,
+		right: 20,
+		bottom: 20,
+		left: 200,
+	};
+
+	const innerHeight = height - (margin.bottom + margin.top);
+	const innerWidth = width - margin.right - margin.left;
 
 	const yScale = d3
 		.scaleBand()
-		.domain(data.map(d => d.Country))
-		.range([0, height]);
+		.domain(data.map(d => yAccessor(d)))
+		.range([0, innerHeight]);
 
 	const xScale = d3
 		.scaleLinear()
-		.domain([0, d3.max(data, d => d.Population)])
-		.range([0, width]);
+		.domain([0, d3.max(data, d => xAccessor(d))])
+		.range([0, innerWidth]);
+
+	// console.log(xScale.ticks());
+	// console.log(yScale.domain());
 
 	return (
 		<svg width={width} height={height}>
-			{data.map(d => (
-				<rect
-					key={d['Country code']}
-					x={0}
-					y={yScale(d.Country)}
-					width={xScale(d.Population)}
-					height={yScale.bandwidth()}
+			<g transform={`translate(${margin.left}, ${margin.top})`}>
+				<AxisBottom
+					xScale={xScale}
+					innerHeight={innerHeight}
+					gridStrokeColour={gridStrokeColour}
 				/>
-			))}
+				<AxisLeft yScale={yScale} margin={margin} />
+				<Bars
+					data={data}
+					yScale={yScale}
+					xScale={xScale}
+					yAccessor={yAccessor}
+					xAccessor={xAccessor}
+					keyAccessor={keyAccessor}
+					barFillColour={barFillColour}
+				/>
+			</g>
 		</svg>
 	);
 };
