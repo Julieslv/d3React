@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
-export const AxisBottom = ({ xScale, innerHeight, gridStrokeColour }) =>
+export const AxisBottom = ({
+	xScale,
+	innerHeight,
+	gridStrokeColour,
+	tickFormat,
+}) =>
 	xScale.ticks().map(tickValue => (
 		<g transform={`translate(${xScale(tickValue)},0)`}>
 			<line
@@ -11,7 +16,7 @@ export const AxisBottom = ({ xScale, innerHeight, gridStrokeColour }) =>
 				stroke={gridStrokeColour}
 			/>
 			<TextEl y={innerHeight + 3} style={{ textAnchor: 'middle' }} dy='.71em'>
-				{tickValue}
+				{tickFormat(tickValue)}
 			</TextEl>
 		</g>
 	));

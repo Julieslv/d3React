@@ -9,7 +9,7 @@ export const useData = xAccessor => {
 	useEffect(() => {
 		const newRow = d => {
 			// d.Population = +d['2020'];
-			d.Population = +d['2020'];
+			d.Population = +d['2020'] * 1000;
 			return d;
 		};
 		csv(dataUrl, newRow).then(data => {

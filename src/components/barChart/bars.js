@@ -6,6 +6,7 @@ export const Bars = ({
 	xAccessor,
 	keyAccessor,
 	barFillColour,
+	tooltipFormat,
 }) =>
 	data.map((d, i) => (
 		<rect
@@ -15,6 +16,7 @@ export const Bars = ({
 			y={yScale(yAccessor(d))}
 			width={xScale(xAccessor(d))}
 			height={yScale.bandwidth()}
-			fill={barFillColour}
-		/>
+			fill={barFillColour}>
+			<title>{tooltipFormat(xAccessor(d))}</title>
+		</rect>
 	));
