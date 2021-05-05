@@ -1,13 +1,22 @@
-export const AxisLeft = ({ yScale, innerWidth, tickOffset = 3 }) =>
+import styled from 'styled-components';
+
+export const AxisLeft = ({
+	yScale,
+	innerWidth,
+	tickOffset = 3,
+	gridStrokeColour,
+}) =>
 	yScale.ticks().map(tickValue => (
 		<g className='tick' transform={`translate(0,${yScale(tickValue)})`}>
-			<line x2={innerWidth} />
-			<text
-				key={tickValue}
-				style={{ textAnchor: 'end' }}
-				x={-tickOffset}
-				dy='.32em'>
+			<line x2={innerWidth} stroke={gridStrokeColour} />
+			<TextEl key={tickValue} x={-tickOffset} dy='.32em'>
 				{tickValue}
-			</text>
+			</TextEl>
 		</g>
 	));
+
+const TextEl = styled.text`
+	fill: rgba(155, 0, 0, 0.4);
+	font-size: 0.675em;
+	text-anchor: end;
+`;

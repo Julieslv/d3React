@@ -6,10 +6,12 @@ export const Marks = ({
 	yValue,
 	tooltipFormat,
 	circleRadius,
+	markFillColour,
 }) =>
 	data.map(d => (
 		<circle
 			className='mark'
+			fill={markFillColour}
 			cx={xScale(xValue(d))}
 			cy={yScale(yValue(d))}
 			r={circleRadius}>
