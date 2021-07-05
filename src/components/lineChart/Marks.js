@@ -12,11 +12,12 @@ export const Marks = ({
 	<MarksEl>
 		<path
 			d={line()
-				.x(d => xScale(xValue(d)))
-				.y(d => yScale(yValue(d)))
-				.curve(curveNatural)(data)}
+				.x((d) => xScale(xValue(d)))
+				.y((d) => yScale(yValue(d)))
+				.curve(curveNatural)(data)} //https://bl.ocks.org/d3noob/ced1b9b18bd8192d2c898884033b5529
 		/>
-		{data.map(d => (
+		{/* // remove if we don't want circles to show.  */}
+		{data.map((d) => (
 			<circle cx={xScale(xValue(d))} cy={yScale(yValue(d))} r={circleRadius}>
 				<title>{tooltipFormat(xValue(d))}</title>
 			</circle>

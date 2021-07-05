@@ -5,14 +5,16 @@ import React from 'react';
 // import Load from './components/loadeDataExample/dataExample';
 // import BarChart from './components/barChart/barChart';
 // import ScatterPlot from './components/scatterPlot/ScatterPlot';
-import LineChart from './components/lineChart/lineChart';
+// import LineChart from './components/lineChart/lineChart';
+import GeoChart from './components/geoChart/geoChart';
 
 import styled from 'styled-components';
 
 const App = () => {
 	return (
 		<PageEl>
-			<LineChart />
+			<GeoChart />
+			{/* <LineChart /> */}
 			{/* <BarChart /> */}
 			{/* <ScatterPlot /> */}
 			{/* <PieArc /> */}

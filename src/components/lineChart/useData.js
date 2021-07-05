@@ -8,8 +8,8 @@ export const useData = () => {
 	const [data, setData] = useState(null);
 
 	useEffect(() => {
-		console.log(data[0]);
-		const row = d => {
+		// console.log(data[0]); // this will break chart on first load.
+		const row = (d) => {
 			d.temperature = +d.temperature;
 			d.timestamp = new Date(d.timestamp);
 			return d;
