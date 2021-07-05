@@ -6,14 +6,16 @@ import React from 'react';
 // import BarChart from './components/barChart/barChart';
 // import ScatterPlot from './components/scatterPlot/ScatterPlot';
 // import LineChart from './components/lineChart/lineChart';
-import GeoChart from './components/geoChart/geoChart';
+// import GeoChart from './components/geoChart/geoChart';
+import SelectArrowChart from './components/selectChart/selectChart';
 
 import styled from 'styled-components';
 
 const App = () => {
 	return (
 		<PageEl>
-			<GeoChart />
+			<SelectArrowChart />
+			{/* <GeoChart /> */}
 			{/* <LineChart /> */}
 			{/* <BarChart /> */}
 			{/* <ScatterPlot /> */}
