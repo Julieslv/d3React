@@ -7,26 +7,39 @@ import React from 'react';
 // import ScatterPlot from './components/scatterPlot/ScatterPlot';
 // import LineChart from './components/lineChart/lineChart';
 // import GeoChart from './components/geoChart/geoChart';
-import SelectArrowChart from './components/selectChart/selectChart';
+import SelectScatter from './components/selectChart/ScatterPlot';
 
 import styled from 'styled-components';
 
 const App = () => {
 	return (
-		<PageEl>
-			<SelectArrowChart />
-			{/* <GeoChart /> */}
-			{/* <LineChart /> */}
-			{/* <BarChart /> */}
-			{/* <ScatterPlot /> */}
-			{/* <PieArc /> */}
-			{/* <Load /> */}
-			{/* <Face /> */}
-		</PageEl>
+		<>
+			<FlexColumn>
+				<SelectScatter />
+			</FlexColumn>
+			<FlexCenter>
+				{/* <GeoChart /> */}
+				{/* <LineChart /> */}
+				{/* <BarChart /> */}
+				{/* <ScatterPlot /> */}
+				{/* <PieArc /> */}
+				{/* <Load /> */}
+				{/* <Face /> */}
+			</FlexCenter>
+		</>
 	);
 };
 
-const PageEl = styled.div`
+const FlexColumn = styled.div`
+	margin: 0 auto;
+	background: pink;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	/* align-items: center; */
+`;
+
+const FlexCenter = styled.div`
 	margin: 0 auto;
 	background: pink;
 	display: flex;
