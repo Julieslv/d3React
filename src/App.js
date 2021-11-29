@@ -15,7 +15,9 @@ const App = () => {
 	return (
 		<>
 			<FlexColumn>
-				<SelectScatter />
+				<div>
+					<SelectScatter />
+				</div>
 			</FlexColumn>
 			<FlexCenter>
 				{/* <GeoChart /> */}
@@ -32,11 +34,10 @@ const App = () => {
 
 const FlexColumn = styled.div`
 	margin: 0 auto;
-	background: pink;
-	display: flex;
+	/* display: flex;
 	flex-direction: column;
 	justify-content: center;
-	/* align-items: center; */
+	align-items: center; */
 `;
 
 const FlexCenter = styled.div`

@@ -6,7 +6,7 @@ export const AxisLeft = ({
 	tickOffset = 3,
 	gridStrokeColour,
 }) =>
-	yScale.ticks().map(tickValue => (
+	yScale.ticks().map((tickValue) => (
 		<g className='tick' transform={`translate(0,${yScale(tickValue)})`}>
 			<line x2={innerWidth} stroke={gridStrokeColour} />
 			<TextEl key={tickValue} x={-tickOffset} dy='.32em'>

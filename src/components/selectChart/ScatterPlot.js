@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { scaleLinear, format, extent } from 'd3';
+import {
+	scaleLinear,
+	scaleOrdinal,
+	schemeCategory10,
+	format,
+	extent,
+} from 'd3';
 
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
@@ -9,15 +15,16 @@ import { useData } from './components/useData';
 import { AxisBottom } from './components/AxisBottom';
 import { AxisLeft } from './components/AxisLeft';
 import { Marks } from './components/Marks';
-import { DropdownOLD } from './components/Dropdown';
+import { ColorLegend } from './components/ColorLegend';
 
 const width = 960;
 const height = 500;
-const margin = { top: 20, right: 30, bottom: 65, left: 90 };
+const margin = { top: 20, right: 230, bottom: 65, left: 90 };
 const xAxisLabelOffset = 50;
 const yAxisLabelOffset = 45;
-const gridStrokeColour = '#00000035';
-const markFillColour = '#ff000065';
+const gridStrokeColour = '#edaad0';
+const markFillColour = '#d3599d';
+const circleRadius = 7;
 
 const attributes = [
 	{ value: 'sepal_length', label: 'Sepal Length' },
@@ -50,14 +57,12 @@ const ScatterPlot = () => {
 	const yValue = (d) => d[yAttribute];
 	const yAxisLabel = getLabel(yAttribute);
 
-	const options = ['one', 'two', 'three'];
-	const defaultOption = options[0];
+	const colorValue = (d) => d.species;
+	const colorLegendLabel = 'Species';
 
 	if (!data) {
 		return <pre>Loading...</pre>;
 	}
-
-	console.log(data.columns);
 
 	const innerHeight = height - margin.top - margin.bottom;
 	const innerWidth = width - margin.left - margin.right;
@@ -74,37 +79,33 @@ const ScatterPlot = () => {
 		.domain(extent(data, yValue))
 		.range([0, innerHeight]);
 
+	const colorScale = scaleOrdinal()
+		.domain(data.map(colorValue))
+		.range([`#c7398a45`, `#d4cec065`, `#4f912545`]);
+
 	return (
-		<>
+		<ScatterPlotChart>
 			<Controls>
-				<div>
-					<label htmlFor='x-select'>X: </label>
-					{/* 					<DropdownOLD
-						options={attributes}
-						id='x-select'
-						selectedValue={xAttribute}
-						onSelectedValueChange={setXAttribute}
-					/> */}
+				<div className='col-flex'>
+					<div className='label'>
+						<b>X:</b>
+					</div>
 					<Dropdown
 						options={attributes}
-						onChange={setXAttribute}
-						value={xAttribute}
 						placeholder={xAttribute}
+						value={xAttribute}
+						onChange={({ value }) => setXAttribute(value)} //
 					/>
 				</div>
-				<div>
-					<label htmlFor='x-select'>Y: </label>
-					{/* 					<DropdownOLD
-						options={attributes}
-						id='x-select'
-						selectedValue={yAttribute}
-						onSelectedValueChange={setYAttribute}
-					/> */}
+				<div className='col-flex'>
+					<div className='label'>
+						<b>Y:</b>
+					</div>
 					<Dropdown
 						options={attributes}
-						onChange={setYAttribute}
-						value={yAttribute}
 						placeholder={yAttribute}
+						value={yAttribute}
+						onChange={({ value }) => setYAttribute(value)}
 					/>
 				</div>
 			</Controls>
@@ -122,7 +123,8 @@ const ScatterPlot = () => {
 						className='axis-label'
 						transform={`translate(${-yAxisLabelOffset},${
 							innerHeight / 2
-						}) rotate(-90)`}>
+						}) rotate(-90)`}
+						textAnchor='middle'>
 						{yAxisLabel}
 					</TextEl>
 					<AxisLeft
@@ -134,43 +136,78 @@ const ScatterPlot = () => {
 					<TextEl
 						className='axis-label'
 						x={innerWidth / 2}
-						y={innerHeight + xAxisLabelOffset}>
+						y={innerHeight + xAxisLabelOffset}
+						textAnchor='middle'>
 						{xAxisLabel}
 					</TextEl>
+					<g transform={`translate(${innerWidth + 20}, 20)`}>
+						<TextEl textAnchor='left'>{colorLegendLabel}</TextEl>
+						<ColorLegend
+							colorScale={colorScale}
+							tickSpacing={20}
+							tickSize={15}
+							tickTextOffset={15}
+							tickSize={circleRadius}
+						/>
+					</g>
 					<Marks
 						data={data}
 						xScale={xScale}
 						yScale={yScale}
 						xValue={xValue}
 						yValue={yValue}
+						colorScale={colorScale}
+						colorValue={colorValue}
 						tooltipFormat={xAxisTickFormat}
-						circleRadius={7}
-						markFillColour={markFillColour}
+						circleRadius={circleRadius}
 					/>
 				</g>
 			</svg>
-		</>
+		</ScatterPlotChart>
 	);
 };
+const ScatterPlotChart = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	background-color: #ffffff;
+	padding: 5rem 2rem;
+`;
 
 const Controls = styled.div`
+	.col-flex {
+		display: flex;
+		justify-content: center;
+		align-content: space-between;
+	}
 	display: flex;
 	/* justify-content: center; */
 	align-content: space-between;
-	label {
-		display: inline-block;
-		margin: 0 1em;
+	.label {
+		color: #d3599d;
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 1.5rem;
+		padding: 0 1em;
 	}
-	select {
+	.Dropdown-root {
 		margin-right: 2rem;
+		display: inline-block;
+		.Dropdown-option {
+			&.is-selected,
+			:hover {
+				background-color: #f8d3e7;
+			}
+		}
 	}
 `;
 
 const TextEl = styled.text`
-	fill: rgba(155, 0, 0, 0.2);
+	fill: #d3599d;
 	font-size: 2em;
 	font-weight: 700;
-	text-anchor: middle;
 `;
 
 export default ScatterPlot;

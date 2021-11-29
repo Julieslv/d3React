@@ -7,7 +7,7 @@ export const AxisBottom = ({
 	tickOffset = 3,
 	gridStrokeColour,
 }) =>
-	xScale.ticks().map(tickValue => (
+	xScale.ticks().map((tickValue) => (
 		<g
 			className='tick'
 			key={tickValue}
@@ -20,7 +20,7 @@ export const AxisBottom = ({
 	));
 
 const TextEl = styled.text`
-	fill: rgba(155, 0, 0, 0.4);
+	fill: #c0267e;
 	font-size: 0.675em;
 	text-anchor: middle;
 `;

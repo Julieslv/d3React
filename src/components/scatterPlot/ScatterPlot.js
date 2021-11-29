@@ -23,14 +23,14 @@ const ScatterPlot = () => {
 	const innerHeight = height - margin.top - margin.bottom;
 	const innerWidth = width - margin.left - margin.right;
 
-	const xValue = d => d.petal_length;
+	const xValue = (d) => d.petal_length;
 	const xAxisLabel = 'Petal Length';
 
-	const yValue = d => d.sepal_width;
+	const yValue = (d) => d.sepal_width;
 	const yAxisLabel = 'Sepal Width';
 
 	const siFormat = format('.2s');
-	const xAxisTickFormat = tickValue => siFormat(tickValue).replace('G', 'B');
+	const xAxisTickFormat = (tickValue) => siFormat(tickValue).replace('G', 'B');
 
 	const xScale = scaleLinear()
 		.domain(extent(data, xValue))
