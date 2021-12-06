@@ -22,6 +22,7 @@ const height = 500;
 const margin = { top: 20, right: 230, bottom: 65, left: 90 };
 const xAxisLabelOffset = 50;
 const yAxisLabelOffset = 45;
+const fadeOpacity = 0.2;
 const gridStrokeColour = '#edaad0';
 const markFillColour = '#d3599d';
 const circleRadius = 7;
@@ -44,6 +45,7 @@ const getLabel = (value) => {
 
 const ScatterPlot = () => {
 	const data = useData();
+	const [hoveredValue, setHoveredValue] = useState(null);
 
 	const initialXAttribute = 'petal_length';
 	// Dropdown
@@ -64,6 +66,9 @@ const ScatterPlot = () => {
 		return <pre>Loading...</pre>;
 	}
 
+	//ColouredLegendAnimation
+	const filteredData = data.filter((d) => hoveredValue === colorValue(d));
+
 	const innerHeight = height - margin.top - margin.bottom;
 	const innerWidth = width - margin.left - margin.right;
 
@@ -81,7 +86,7 @@ const ScatterPlot = () => {
 
 	const colorScale = scaleOrdinal()
 		.domain(data.map(colorValue))
-		.range([`#c7398a45`, `#d4cec065`, `#4f912545`]);
+		.range([`#c7398a`, `#26C77B`, `#9B3AC7`]);
 
 	return (
 		<ScatterPlotChart>
@@ -148,10 +153,27 @@ const ScatterPlot = () => {
 							tickSize={15}
 							tickTextOffset={15}
 							tickSize={circleRadius}
+							onHover={setHoveredValue}
+							hoveredValue={hoveredValue}
+							fadeOpacity={fadeOpacity}
+						/>
+					</g>
+					{/* we overlay the data at a lower opacity and then lay the filtered data underneath */}
+					<g opacity={hoveredValue ? fadeOpacity : 1}>
+						<Marks
+							data={data}
+							xScale={xScale}
+							yScale={yScale}
+							xValue={xValue}
+							yValue={yValue}
+							colorScale={colorScale}
+							colorValue={colorValue}
+							tooltipFormat={xAxisTickFormat}
+							circleRadius={circleRadius}
 						/>
 					</g>
 					<Marks
-						data={data}
+						data={filteredData}
 						xScale={xScale}
 						yScale={yScale}
 						xValue={xValue}
