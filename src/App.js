@@ -7,7 +7,8 @@ import React from 'react';
 // import ScatterPlot from './components/scatterPlot/ScatterPlot';
 // import LineChart from './components/lineChart/lineChart';
 // import GeoChart from './components/geoChart/geoChart';
-import SelectScatter from './components/selectChart/ScatterPlot';
+// import SelectScatter from './components/selectChart/ScatterPlot';
+import PointsOnAMap from './components/pointsOnAMap/pointsOnAMap';
 
 import styled from 'styled-components';
 
@@ -15,11 +16,10 @@ const App = () => {
 	return (
 		<>
 			<FlexColumn>
-				<div>
-					<SelectScatter />
-				</div>
+				<div>{/* <SelectScatter /> */}</div>
 			</FlexColumn>
 			<FlexCenter>
+				<PointsOnAMap />
 				{/* <GeoChart /> */}
 				{/* <LineChart /> */}
 				{/* <BarChart /> */}
@@ -42,7 +42,7 @@ const FlexColumn = styled.div`
 
 const FlexCenter = styled.div`
 	margin: 0 auto;
-	background: pink;
+	background: #ffe9ed;
 	display: flex;
 	justify-content: center;
 	align-items: center;
