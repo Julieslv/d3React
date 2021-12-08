@@ -9,9 +9,10 @@ export const useCities = () => {
 
 	// use the accessor function to manipulate the data to return a number and not a string.
 	//lat: "35.685" lng: '139.7514';
-	const row = (d) => {
-		d.lat = +d.lat;
-		d.lng = +d.lng;
+	const row = d => {
+		d.lat = Number(d.lat);
+		d.lng = Number(d.lng);
+		d.population = Number(d.population);
 		return d;
 	};
 
