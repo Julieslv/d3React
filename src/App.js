@@ -9,6 +9,7 @@ import React from 'react';
 // import GeoChart from './components/geoChart/geoChart';
 // import SelectScatter from './components/selectChart/ScatterPlot';
 import PointsOnAMap from './components/pointsOnAMap/pointsOnAMap';
+import WorkingWithTime from './components/workingWithTime/workingWithTime';
 
 import styled from 'styled-components';
 
@@ -19,7 +20,8 @@ const App = () => {
 				<div>{/* <SelectScatter /> */}</div>
 			</FlexColumn>
 			<FlexCenter>
-				<PointsOnAMap />
+				<WorkingWithTime />
+				{/* <PointsOnAMap /> */}
 				{/* <GeoChart /> */}
 				{/* <LineChart /> */}
 				{/* <BarChart /> */}
@@ -47,6 +49,7 @@ const FlexCenter = styled.div`
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
+	min-height: 100vh;
 `;
 
 export default App;
