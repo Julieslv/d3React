@@ -89,4 +89,7 @@ const SvgEl = styled.svg`
 		font-size: 2.2em;
 		fill: #635f5d;
 	}
+	.tick line {
+		stroke: #ffb6c1;
+	}
 `;
