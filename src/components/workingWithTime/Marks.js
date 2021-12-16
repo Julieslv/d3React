@@ -1,24 +1,23 @@
 import styled from 'styled-components';
 export const Marks = ({
-	data,
+	binnedData,
 	xScale,
 	yScale,
-	xValue,
-	yValue,
+	innerHeight,
 	tooltipFormat,
-	circleRadius,
 }) =>
-	data.map((d, i) => (
-		<CircleEl
+	binnedData.map((d, i) => (
+		<RectEl
 			className='mark'
-			cx={xScale(xValue(d))}
-			cy={yScale(yValue(d))}
-			r={circleRadius}
+			x={xScale(d.x0)}
+			y={yScale(d.y)}
+			width={xScale(d.x1) - xScale(d.x0)}
+			height={innerHeight - yScale(d.y)}
 			key={`circle_${i}`}>
-			<title>{tooltipFormat(xValue(d))}</title>
-		</CircleEl>
+			<title>{tooltipFormat(d.y)}</title>
+		</RectEl>
 	));
 
-const CircleEl = styled.circle`
+const RectEl = styled.rect`
 	fill: #ff000050;
 `;

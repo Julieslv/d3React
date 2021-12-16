@@ -1,5 +1,16 @@
 import { useState, useCallback, useEffect } from 'react';
-import { csv, scaleLinear, scaleTime, max, timeFormat, extent } from 'd3';
+import {
+	csv,
+	scaleLinear,
+	scaleTime,
+	max,
+	timeFormat,
+	extent,
+	bin,
+	ticks,
+	timeMonths,
+	sum,
+} from 'd3';
 import styled from 'styled-components';
 import Loading from '../shared/loading/loading';
 import { useData } from './useData';
@@ -39,10 +50,30 @@ const WorkingWithTime = () => {
 		.range([0, innerWidth])
 		.nice();
 
+	// Set up data bins
+	// https://github.com/d3/d3-array/blob/v3.1.1/README.md#bin
+	const [start, stop] = xScale.domain();
+	const binnedData = bin()
+		.value(xValue)
+		.domain(xScale.domain())
+		// Setup up the intervals for the buckets https://github.com/d3/d3-time/blob/v3.0.0/README.md#_interval
+		.thresholds(timeMonths(start, stop))(data)
+		.map(array => ({
+			// https://github.com/d3/d3-array/blob/v3.1.1/README.md#sum
+			// Returns the sum of the given iterable of numbers.
+			y: sum(array, yValue),
+			x0: array.x0,
+			x1: array.x1,
+		}));
+
 	const yScale = scaleLinear()
-		.domain(extent(data, yValue))
+		.domain([0, max(binnedData, d => d.y)])
 		.range([innerHeight, 0]);
 
+	console.log('binnedData');
+	console.log(binnedData);
+	console.log('yScale.domain()');
+	console.log(yScale.domain());
 	return (
 		<SvgEl width={width} height={height}>
 			<g transform={`translate(${margin.left},${margin.top})`}>
@@ -69,13 +100,11 @@ const WorkingWithTime = () => {
 					{xAxisLabel}
 				</text>
 				<Marks
-					data={data}
+					binnedData={binnedData}
 					xScale={xScale}
 					yScale={yScale}
-					xValue={xValue}
-					yValue={yValue}
-					tooltipFormat={xAxisTickFormat}
-					circleRadius={circleRadius}
+					tooltipFormat={d => d}
+					innerHeight={innerHeight}
 				/>
 			</g>
 		</SvgEl>

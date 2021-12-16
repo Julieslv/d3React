@@ -1,3 +1,5 @@
+import styled from 'styled-components';
+
 export const AxisLeft = ({ yScale, innerWidth, tickOffset = 3 }) =>
 	yScale.ticks().map((tickValue, i) => (
 		<g
@@ -10,3 +12,10 @@ export const AxisLeft = ({ yScale, innerWidth, tickOffset = 3 }) =>
 			</text>
 		</g>
 	));
+
+const groupEl = styled.g`
+	.axis-label {
+		font-size: 2.2em;
+		fill: #635f5d;
+	}
+`;
