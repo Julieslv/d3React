@@ -10,7 +10,8 @@ import React from 'react';
 // import SelectScatter from './components/selectChart/ScatterPlot';
 // import PointsOnAMap from './components/pointsOnAMap/pointsOnAMap';
 // import WorkingWithTime from './components/workingWithTime/workingWithTime';
-import PointsOnAMapMissingMigrants from './components/pointsOnAMapMissingMigrants/pointsOnAMap';
+// import PointsOnAMapMissingMigrants from './components/pointsOnAMapMissingMigrants/pointsOnAMap';
+import ScrubberMap from './components/scrubberMap/scrubberMap';
 
 import styled from 'styled-components';
 
@@ -21,7 +22,8 @@ const App = () => {
 				<div>{/* <SelectScatter /> */}</div>
 			</FlexColumn>
 			<FlexCenter>
-				<PointsOnAMapMissingMigrants />
+				<ScrubberMap />
+				{/* <PointsOnAMapMissingMigrants /> */}
 				{/* <WorkingWithTime /> */}
 				{/* <PointsOnAMap /> */}
 				{/* <GeoChart /> */}
