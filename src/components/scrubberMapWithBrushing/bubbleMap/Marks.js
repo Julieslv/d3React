@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import {
 	geoNaturalEarth1,
 	geoAzimuthalEqualArea,
@@ -9,6 +10,7 @@ https://github.com/d3/d3-geo
 */
 
 import styled from 'styled-components';
+import { feature } from 'topojson';
 
 const projection = geoNaturalEarth1();
 const path = geoPath(projection);
@@ -21,12 +23,19 @@ export const Marks = ({
 	sizeValue,
 }) => (
 	<MarksEl>
-		<path className='sphere' d={path({ type: 'Sphere' })} />
-		<path className='graticules' d={path(graticule())} />
-		{land.features.map((feature, i) => (
-			<path className='land' key={`land_${i}`} d={path(feature)} />
-		))}
-		<path className='interiors' d={path(interiors)} />
+		{useMemo(
+			() => (
+				<>
+					<path className='sphere' d={path({ type: 'Sphere' })} />
+					<path className='graticules' d={path(graticule())} />
+					{land.features.map((feature, i) => (
+						<path className='land' key={`land_${i}`} d={path(feature)} />
+					))}
+					<path className='interiors' d={path(interiors)} />
+				</>
+			),
+			[land, interiors]
+		)}
 		{data.map((d, i) => {
 			//^ d3 projections are also functions
 			//^ https://d3-wiki.readthedocs.io/zh_CN/master/Geo-Projections/#_projection

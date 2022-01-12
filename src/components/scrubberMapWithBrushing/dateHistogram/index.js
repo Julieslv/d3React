@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef, useMemo } from 'react';
 import {
 	scaleLinear,
 	scaleTime,
@@ -17,6 +17,7 @@ import { AxisBottom } from './AxisBottom';
 import { AxisLeft } from './AxisLeft';
 import { Marks } from './Marks';
 
+// put stuff here that you do not have to re-render, not part of export and therefor re-render
 const width = 960;
 const margin = { top: 0, right: 30, bottom: 20, left: 50 };
 const xAxisLabelOffset = 50;
@@ -24,41 +25,50 @@ const yAxisLabelOffset = 40;
 const circleRadius = 3;
 const tickOffset = 10;
 
+//https://d3-wiki.readthedocs.io/zh_CN/master/Time-Formatting/
+const xAxisTickFormat = timeFormat('%m/%d/%Y');
+const xAxisLabel = 'Time';
+
+const yValue = d => d['Total Dead and Missing'];
+const yAxisLabel = 'Total Dead and Missing';
+
 const DateHistogram = ({ data, height, setBrushExtent, xValue }) => {
 	const innerHeight = height - margin.top - margin.bottom;
 	const innerWidth = width - margin.left - margin.right;
-	const xAxisLabel = 'Time';
 
-	const yValue = d => d['Total Dead and Missing'];
-	const yAxisLabel = 'Total Dead and Missing';
-
-	//https://d3-wiki.readthedocs.io/zh_CN/master/Time-Formatting/
-	const xAxisTickFormat = timeFormat('%m/%d/%Y');
-
-	const xScale = scaleTime()
-		.domain(extent(data, xValue))
-		.range([0, innerWidth])
-		.nice();
+	//? the useMemo method does not seem to be doing what it ought to do?
+	const xScale = useMemo(() => {
+		return scaleTime()
+			.domain(extent(data, xValue))
+			.range([0, innerWidth])
+			.nice();
+	}, [data, xValue, innerWidth]);
 
 	// Set up data bins
 	// https://github.com/d3/d3-array/blob/v3.1.1/README.md#bin
-	const [start, stop] = xScale.domain();
-	const binnedData = bin()
-		.value(xValue)
-		.domain(xScale.domain())
-		// Setup up the intervals for the buckets https://github.com/d3/d3-time/blob/v3.0.0/README.md#_interval
-		.thresholds(timeMonths(start, stop))(data)
-		.map(array => ({
-			// https://github.com/d3/d3-array/blob/v3.1.1/README.md#sum
-			// Returns the sum of the given iterable of numbers.
-			y: sum(array, yValue),
-			x0: array.x0,
-			x1: array.x1,
-		}));
+	const binnedData = useMemo(() => {
+		const [start, stop] = xScale.domain();
+		return (
+			bin()
+				.value(xValue)
+				.domain(xScale.domain())
+				// Setup up the intervals for the buckets https://github.com/d3/d3-time/blob/v3.0.0/README.md#_interval
+				.thresholds(timeMonths(start, stop))(data)
+				.map(array => ({
+					// https://github.com/d3/d3-array/blob/v3.1.1/README.md#sum
+					// Returns the sum of the given iterable of numbers.
+					y: sum(array, yValue),
+					x0: array.x0,
+					x1: array.x1,
+				}))
+		);
+	}, [xValue, xScale, data]);
 
-	const yScale = scaleLinear()
-		.domain([0, max(binnedData, d => d.y)])
-		.range([innerHeight, 0]);
+	const yScale = useMemo(() => {
+		return scaleLinear()
+			.domain([0, max(binnedData, d => d.y)])
+			.range([innerHeight, 0]);
+	}, [binnedData, innerHeight]);
 
 	const brushed = ({ selection }) => {
 		if (selection === null) {
@@ -88,7 +98,7 @@ const DateHistogram = ({ data, height, setBrushExtent, xValue }) => {
 		return () => {
 			// cleanup
 		};
-	}, [innerWidth, innerHeight]); // dependency's array
+	}, [innerWidth, innerHeight, setBrushExtent, xScale.invert]); // dependency's array
 
 	return (
 		<>
