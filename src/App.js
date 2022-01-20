@@ -12,7 +12,8 @@ import React from 'react';
 // import WorkingWithTime from './components/workingWithTime/workingWithTime';
 // import PointsOnAMapMissingMigrants from './components/pointsOnAMapMissingMigrants/pointsOnAMap';
 // import ScrubberMap from './components/scrubberMap/scrubberMap';
-import ScrubberMapWithBrushing from './components/scrubberMapWithBrushing/scrubberMapWithBrushing.js';
+// import ScrubberMapWithBrushing from './components/scrubberMapWithBrushing/scrubberMapWithBrushing.js';
+import ScatterPlotLogScale from './components/scatterPlotLogScale';
 
 import styled from 'styled-components';
 
@@ -23,7 +24,8 @@ const App = () => {
 				<div>{/* <SelectScatter /> */}</div>
 			</FlexColumn>
 			<FlexCenter>
-				<ScrubberMapWithBrushing />
+				<ScatterPlotLogScale />
+				{/* <ScrubberMapWithBrushing /> */}
 				{/* <ScrubberMap /> */}
 				{/* <PointsOnAMapMissingMigrants /> */}
 				{/* <WorkingWithTime /> */}
