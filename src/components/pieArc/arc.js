@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as d3 from 'd3';
-import Loading from '../loading/loading';
+import Loading from '../shared/loading/loading';
 
 // import styled from 'styled-components';
 const dataUrl = '/assets/data/cssNamedColors.csv';
@@ -19,7 +19,7 @@ const PieArc = () => {
 	// the array of state change(dependencies) where you want the effect to take place.
 	// in our cse it's empty as we only wan this to render once.
 
-	data ? console.log(data[0]) : console.log('no data');
+	// data ? console.log(data[0]) : console.log('no data');
 
 	const width = window.innerWidth;
 	const height = 500;

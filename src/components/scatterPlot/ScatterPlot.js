@@ -23,14 +23,14 @@ const ScatterPlot = () => {
 	const innerHeight = height - margin.top - margin.bottom;
 	const innerWidth = width - margin.left - margin.right;
 
-	const xValue = (d) => d.petal_length;
+	const xValue = d => d.petal_length;
 	const xAxisLabel = 'Petal Length';
 
-	const yValue = (d) => d.sepal_width;
+	const yValue = d => d.sepal_width;
 	const yAxisLabel = 'Sepal Width';
 
 	const siFormat = format('.2s');
-	const xAxisTickFormat = (tickValue) => siFormat(tickValue).replace('G', 'B');
+	const xAxisTickFormat = tickValue => siFormat(tickValue).replace('G', 'B');
 
 	const xScale = scaleLinear()
 		.domain(extent(data, xValue))
@@ -42,46 +42,49 @@ const ScatterPlot = () => {
 		.range([0, innerHeight]);
 
 	return (
-		<svg width={width} height={height}>
-			<g transform={`translate(${margin.left},${margin.top})`}>
-				<AxisBottom
-					xScale={xScale}
-					innerHeight={innerHeight}
-					tickFormat={xAxisTickFormat}
-					tickOffset={5}
-					gridStrokeColour={gridStrokeColour}
-				/>
-				<TextEl
-					className='axis-label'
-					transform={`translate(${-yAxisLabelOffset},${
-						innerHeight / 2
-					}) rotate(-90)`}>
-					{yAxisLabel}
-				</TextEl>
-				<AxisLeft
-					yScale={yScale}
-					innerWidth={innerWidth}
-					tickOffset={5}
-					gridStrokeColour={gridStrokeColour}
-				/>
-				<TextEl
-					className='axis-label'
-					x={innerWidth / 2}
-					y={innerHeight + xAxisLabelOffset}>
-					{xAxisLabel}
-				</TextEl>
-				<Marks
-					data={data}
-					xScale={xScale}
-					yScale={yScale}
-					xValue={xValue}
-					yValue={yValue}
-					tooltipFormat={xAxisTickFormat}
-					circleRadius={7}
-					markFillColour={markFillColour}
-				/>
-			</g>
-		</svg>
+		<>
+			<h1>Iris</h1>
+			<svg width={width} height={height}>
+				<g transform={`translate(${margin.left},${margin.top})`}>
+					<AxisBottom
+						xScale={xScale}
+						innerHeight={innerHeight}
+						tickFormat={xAxisTickFormat}
+						tickOffset={5}
+						gridStrokeColour={gridStrokeColour}
+					/>
+					<TextEl
+						className='axis-label'
+						transform={`translate(${-yAxisLabelOffset},${
+							innerHeight / 2
+						}) rotate(-90)`}>
+						{yAxisLabel}
+					</TextEl>
+					<AxisLeft
+						yScale={yScale}
+						innerWidth={innerWidth}
+						tickOffset={5}
+						gridStrokeColour={gridStrokeColour}
+					/>
+					<TextEl
+						className='axis-label'
+						x={innerWidth / 2}
+						y={innerHeight + xAxisLabelOffset}>
+						{xAxisLabel}
+					</TextEl>
+					<Marks
+						data={data}
+						xScale={xScale}
+						yScale={yScale}
+						xValue={xValue}
+						yValue={yValue}
+						tooltipFormat={xAxisTickFormat}
+						circleRadius={7}
+						markFillColour={markFillColour}
+					/>
+				</g>
+			</svg>
+		</>
 	);
 };
 

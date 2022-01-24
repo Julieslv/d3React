@@ -52,7 +52,7 @@ const ScatterPlotLogScale = () => {
 		.domain([1, max(data, yValue)])
 		.range([innerHeight, 0]);
 
-	console.log([0.01, max(data, yValue)]);
+	// console.log([0.01, max(data, yValue)]);
 
 	return (
 		<svg width={width} height={height}>

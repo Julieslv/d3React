@@ -14,9 +14,12 @@ const GeoChart = () => {
 	}
 
 	return (
-		<svg width={width} height={height}>
-			<Marks data={data} />
-		</svg>
+		<>
+			<h1>GeoChart</h1>
+			<svg width={width} height={height}>
+				<Marks data={data} />
+			</svg>
+		</>
 	);
 };
 

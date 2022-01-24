@@ -7,7 +7,7 @@ import { csv } from 'd3';
 export const useData = () => {
 	const [data, setData] = useState(null);
 	if (data) {
-		console.log(data[0]);
+		// console.log(data[0]);
 	}
 	useEffect(() => {
 		const row = d => {

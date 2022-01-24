@@ -16,12 +16,23 @@ const ScrubberMap = () => {
 		return <Loading />;
 	}
 	return (
-		<svg width={width} height={height}>
-			<BubbleMap worldAtlas={worldAtlas} data={data} />
-			<g transform={`translate(0, ${height - dataHistogramSize * height})`}>
-				<DateHistogram data={data} height={dataHistogramSize * height} />
-			</g>
-		</svg>
+		<>
+			<h1>
+				This dataset about missing migrants comes from the{' '}
+				<a href='https://missingmigrants.iom.int/downloads'>
+					{' '}
+					{/*^ How to do an empty space in react */}
+					Missing Migrants Project
+				</a>
+				.
+			</h1>
+			<svg width={width} height={height}>
+				<BubbleMap worldAtlas={worldAtlas} data={data} />
+				<g transform={`translate(0, ${height - dataHistogramSize * height})`}>
+					<DateHistogram data={data} height={dataHistogramSize * height} />
+				</g>
+			</svg>
+		</>
 	);
 };
 

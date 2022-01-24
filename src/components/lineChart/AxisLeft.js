@@ -6,7 +6,7 @@ export const AxisLeft = ({
 	gridStrokeColour,
 }) =>
 	yScale.ticks().map(tickValue => {
-		console.log(tickValue);
+		// console.log(tickValue);
 		return (
 			<g className='tick' transform={`translate(0,${yScale(tickValue)})`}>
 				<line x2={innerWidth} stroke={gridStrokeColour} />

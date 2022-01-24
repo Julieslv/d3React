@@ -70,44 +70,56 @@ const WorkingWithTime = () => {
 		.domain([0, max(binnedData, d => d.y)])
 		.range([innerHeight, 0]);
 
-	console.log('binnedData');
-	console.log(binnedData);
-	console.log('yScale.domain()');
-	console.log(yScale.domain());
+	// console.log('binnedData');
+	// console.log(binnedData);
+	// console.log('yScale.domain()');
+	// console.log(yScale.domain());
 	return (
-		<SvgEl width={width} height={height}>
-			<g transform={`translate(${margin.left},${margin.top})`}>
-				<AxisBottom
-					xScale={xScale}
-					innerHeight={innerHeight}
-					tickFormat={xAxisTickFormat}
-					tickOffset={tickOffset}
-				/>
-				<text
-					className='axis-label'
-					textAnchor='middle'
-					transform={`translate(${-yAxisLabelOffset},${
-						innerHeight / 2
-					}) rotate(-90)`}>
-					{yAxisLabel}
-				</text>
-				<AxisLeft yScale={yScale} innerWidth={innerWidth} tickOffset={5} />
-				<text
-					className='axis-label'
-					x={innerWidth / 2}
-					y={innerHeight + xAxisLabelOffset}
-					textAnchor='middle'>
-					{xAxisLabel}
-				</text>
-				<Marks
-					binnedData={binnedData}
-					xScale={xScale}
-					yScale={yScale}
-					tooltipFormat={d => d}
-					innerHeight={innerHeight}
-				/>
-			</g>
-		</SvgEl>
+		<>
+			<h1>
+				This dataset about missing migrants comes from the{' '}
+				<a href='https://missingmigrants.iom.int/downloads'>
+					{' '}
+					{/*^ How to do an empty space in react */}
+					Missing Migrants Project
+				</a>
+				.
+			</h1>
+
+			<SvgEl width={width} height={height}>
+				<g transform={`translate(${margin.left},${margin.top})`}>
+					<AxisBottom
+						xScale={xScale}
+						innerHeight={innerHeight}
+						tickFormat={xAxisTickFormat}
+						tickOffset={tickOffset}
+					/>
+					<text
+						className='axis-label'
+						textAnchor='middle'
+						transform={`translate(${-yAxisLabelOffset},${
+							innerHeight / 2
+						}) rotate(-90)`}>
+						{yAxisLabel}
+					</text>
+					<AxisLeft yScale={yScale} innerWidth={innerWidth} tickOffset={5} />
+					<text
+						className='axis-label'
+						x={innerWidth / 2}
+						y={innerHeight + xAxisLabelOffset}
+						textAnchor='middle'>
+						{xAxisLabel}
+					</text>
+					<Marks
+						binnedData={binnedData}
+						xScale={xScale}
+						yScale={yScale}
+						tooltipFormat={d => d}
+						innerHeight={innerHeight}
+					/>
+				</g>
+			</SvgEl>
+		</>
 	);
 };
 

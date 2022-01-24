@@ -25,14 +25,25 @@ const PointsOnAMap = () => {
 		.range([0, maxRadius]);
 
 	return (
-		<svg width={width} height={height}>
-			<Marks
-				worldAtlas={worldAtlas}
-				data={data}
-				sizeScale={sizeScale}
-				sizeValue={sizeValue}
-			/>
-		</svg>
+		<>
+			<h1>
+				This dataset about missing migrants comes from the{' '}
+				<a href='https://missingmigrants.iom.int/downloads'>
+					{' '}
+					{/*^ How to do an empty space in react */}
+					Missing Migrants Project
+				</a>
+				.
+			</h1>
+			<svg width={width} height={height}>
+				<Marks
+					worldAtlas={worldAtlas}
+					data={data}
+					sizeScale={sizeScale}
+					sizeValue={sizeValue}
+				/>
+			</svg>
+		</>
 	);
 };
 

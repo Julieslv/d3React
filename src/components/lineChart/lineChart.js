@@ -42,48 +42,51 @@ const ScatterPlot = () => {
 		.nice();
 
 	return (
-		<svg width={width} height={height}>
-			<g transform={`translate(${margin.left},${margin.top})`}>
-				<AxisBottom
-					xScale={xScale}
-					innerHeight={innerHeight}
-					tickFormat={xAxisTickFormat}
-					tickOffset={7}
-					gridStrokeColour={gridStrokeColour}
-				/>
-				<TextEl
-					className='axis-label'
-					textAnchor='middle'
-					transform={`translate(${-yAxisLabelOffset},${
-						innerHeight / 2
-					}) rotate(-90)`}>
-					{yAxisLabel}
-				</TextEl>
-				<AxisLeft
-					yScale={yScale}
-					innerWidth={innerWidth}
-					tickOffset={7}
-					gridStrokeColour={gridStrokeColour}
-				/>
+		<>
+			<h1>Basic line chart</h1>
+			<svg width={width} height={height}>
+				<g transform={`translate(${margin.left},${margin.top})`}>
+					<AxisBottom
+						xScale={xScale}
+						innerHeight={innerHeight}
+						tickFormat={xAxisTickFormat}
+						tickOffset={7}
+						gridStrokeColour={gridStrokeColour}
+					/>
+					<TextEl
+						className='axis-label'
+						textAnchor='middle'
+						transform={`translate(${-yAxisLabelOffset},${
+							innerHeight / 2
+						}) rotate(-90)`}>
+						{yAxisLabel}
+					</TextEl>
+					<AxisLeft
+						yScale={yScale}
+						innerWidth={innerWidth}
+						tickOffset={7}
+						gridStrokeColour={gridStrokeColour}
+					/>
 
-				<TextEl
-					className='axis-label'
-					x={innerWidth / 2}
-					y={innerHeight + xAxisLabelOffset}
-					textAnchor='middle'>
-					{xAxisLabel}
-				</TextEl>
-				<Marks
-					data={data}
-					xScale={xScale}
-					yScale={yScale}
-					xValue={xValue}
-					yValue={yValue}
-					tooltipFormat={xAxisTickFormat}
-					circleRadius={5}
-				/>
-			</g>
-		</svg>
+					<TextEl
+						className='axis-label'
+						x={innerWidth / 2}
+						y={innerHeight + xAxisLabelOffset}
+						textAnchor='middle'>
+						{xAxisLabel}
+					</TextEl>
+					<Marks
+						data={data}
+						xScale={xScale}
+						yScale={yScale}
+						xValue={xValue}
+						yValue={yValue}
+						tooltipFormat={xAxisTickFormat}
+						circleRadius={5}
+					/>
+				</g>
+			</svg>
+		</>
 	);
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { max, scaleLinear, scaleBand, format } from 'd3';
-import Loading from '../loading/loading';
+import Loading from '../shared/loading/loading';
 import styled from 'styled-components';
 
 import { useData } from './useData';
@@ -66,33 +66,41 @@ const BarChart = () => {
 	// console.log(yScale.domain());
 
 	return (
-		<svg width={width} height={height}>
-			<g transform={`translate(${margin.left}, ${margin.top})`}>
-				<AxisBottom
-					xScale={xScale}
-					innerHeight={innerHeight}
-					gridStrokeColour={gridStrokeColour}
-					tickFormat={xAxisTickFormat}
-				/>
-				<AxisLeft yScale={yScale} margin={margin} />
-				<Bars
-					data={data}
-					yScale={yScale}
-					xScale={xScale}
-					yAccessor={yAccessor}
-					xAccessor={xAccessor}
-					keyAccessor={keyAccessor}
-					barFillColour={barFillColour}
-					tooltipFormat={xAxisTickFormat}
-				/>
-				<TextEl
-					x={innerWidth / 2}
-					y={innerHeight + margin.bottom}
-					textAnchor='middle'>
-					Population
-				</TextEl>
-			</g>
-		</svg>
+		<>
+			<h1>UN World Population Prospects 2019</h1>
+			<p>
+				This is the [United Nations World Population Prospects 2019
+				Dataset](https://population.un.org/wpp/Download/Standard/Population/),
+				cleaned and formatted as CSV
+			</p>
+			<svg width={width} height={height}>
+				<g transform={`translate(${margin.left}, ${margin.top})`}>
+					<AxisBottom
+						xScale={xScale}
+						innerHeight={innerHeight}
+						gridStrokeColour={gridStrokeColour}
+						tickFormat={xAxisTickFormat}
+					/>
+					<AxisLeft yScale={yScale} margin={margin} />
+					<Bars
+						data={data}
+						yScale={yScale}
+						xScale={xScale}
+						yAccessor={yAccessor}
+						xAccessor={xAccessor}
+						keyAccessor={keyAccessor}
+						barFillColour={barFillColour}
+						tooltipFormat={xAxisTickFormat}
+					/>
+					<TextEl
+						x={innerWidth / 2}
+						y={innerHeight + margin.bottom}
+						textAnchor='middle'>
+						Population
+					</TextEl>
+				</g>
+			</svg>
+		</>
 	);
 };
 

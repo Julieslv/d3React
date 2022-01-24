@@ -16,7 +16,7 @@ const graticule = geoGraticule();
 
 export const Marks = ({
 	worldAtlas: { land, interiors },
-	cities,
+	data,
 	sizeScale,
 	sizeValue,
 }) => (
@@ -27,13 +27,12 @@ export const Marks = ({
 			<path className='land' key={`land_${i}`} d={path(feature)} />
 		))}
 		<path className='interiors' d={path(interiors)} />
-		{cities.map((d, i) => {
-			// where d is the data point of city in this case
+		{data.map((d, i) => {
 			//^ d3 projections are also functions
 			//^ https://d3-wiki.readthedocs.io/zh_CN/master/Geo-Projections/#_projection
 			//^  Returns an array [x, y] given the input array [longitude, latitude
 
-			const [x, y] = projection([d.lng, d.lat]);
+			const [x, y] = projection(d.cords);
 			// console.log(x);
 			return (
 				<circle

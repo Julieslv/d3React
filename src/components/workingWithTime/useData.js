@@ -9,9 +9,9 @@ const csvUrl =
 export const useData = () => {
 	const [data, setData] = useState(null);
 
-	if (data) {
-		console.log(data[0]);
-	}
+	// if (data) {
+	// 	// console.log(data[0]);
+	// }
 
 	useEffect(() => {
 		// Restructure the data to to parse as numbers and dates from strings

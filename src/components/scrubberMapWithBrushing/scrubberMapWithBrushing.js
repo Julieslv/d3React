@@ -29,21 +29,32 @@ const ScrubberMapWithBrushing = () => {
 		: data;
 
 	return (
-		<svg width={width} height={height}>
-			<BubbleMap
-				worldAtlas={worldAtlas}
-				filteredData={filteredData}
-				data={data}
-			/>
-			<g transform={`translate(0, ${height - dataHistogramSize * height})`}>
-				<DateHistogram
+		<>
+			<h1>
+				This dataset about missing migrants comes from the{' '}
+				<a href='https://missingmigrants.iom.int/downloads'>
+					{' '}
+					{/*^ How to do an empty space in react */}
+					Missing Migrants Project
+				</a>
+				.
+			</h1>
+			<svg width={width} height={height}>
+				<BubbleMap
+					worldAtlas={worldAtlas}
+					filteredData={filteredData}
 					data={data}
-					height={dataHistogramSize * height}
-					setBrushExtent={setBrushExtent}
-					xValue={xValue}
 				/>
-			</g>
-		</svg>
+				<g transform={`translate(0, ${height - dataHistogramSize * height})`}>
+					<DateHistogram
+						data={data}
+						height={dataHistogramSize * height}
+						setBrushExtent={setBrushExtent}
+						xValue={xValue}
+					/>
+				</g>
+			</svg>
+		</>
 	);
 };
 
