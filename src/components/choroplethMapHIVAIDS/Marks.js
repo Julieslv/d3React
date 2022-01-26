@@ -14,46 +14,37 @@ const projection = geoNaturalEarth1();
 const path = geoPath(projection);
 const graticule = geoGraticule();
 
+const missingDataColor = '#f4f4f450';
+
 export const Marks = ({
-	worldAtlas: { land, interiors },
-	data,
-	sizeScale,
-	sizeValue,
+	worldAtlas: { countries, interiors },
+	rowByNumericCode,
+	colorScale,
+	colorValue,
 }) => (
 	<MarksEl>
 		<path className='sphere' d={path({ type: 'Sphere' })} />
 		<path className='graticules' d={path(graticule())} />
-		{land.features.map((feature, i) => (
-			<path className='land' key={`land_${i}`} d={path(feature)} />
-		))}
-		<path className='interiors' d={path(interiors)} />
-		{data.map((d, i) => {
-			//^ d3 projections are also functions
-			//^ https://d3-wiki.readthedocs.io/zh_CN/master/Geo-Projections/#_projection
-			//^  Returns an array [x, y] given the input array [longitude, latitude
-
-			const [x, y] = projection(d.cords);
-			// console.log(x);
+		{countries.features.map((feature, i) => {
+			// console.log(feature.properties.name);
+			const d = rowByNumericCode.get(feature.id);
+			// console.log(d);
 			return (
-				<circle
-					key={`d_${i}`}
-					className='d'
-					r={sizeScale(sizeValue(d))}
-					cx={x}
-					cy={y}
+				<path
+					// fill={colorScale('0.204618555993')}
+					fill={d ? colorScale(colorValue(d)) : missingDataColor}
+					key={`land_${i}`}
+					d={path(feature)}
 				/>
 			);
 		})}
+		<path className='interiors' d={path(interiors)} />
 	</MarksEl>
 );
 
 const MarksEl = styled.g`
 	.sphere {
 		fill: #ff000020;
-	}
-	.land {
-		fill: #ff000025;
-		stroke: #ffffff50;
 	}
 	.graticules {
 		fill: none;

@@ -3,8 +3,9 @@ import { csv } from 'd3';
 
 // Original source of data
 // ? https://missingmigrants.iom.int/downloads
+// 'https://gist.githubusercontent.com/curran/a9656d711a8ad31d812b8f9963ac441c/raw/267eac8b97d161c479d950ffad3ddd5ce2d1f370/MissingMigrants-Global-2019-10-08T09-47-14-subset.csv';
 const csvUrl =
-	'https://gist.githubusercontent.com/curran/a9656d711a8ad31d812b8f9963ac441c/raw/267eac8b97d161c479d950ffad3ddd5ce2d1f370/MissingMigrants-Global-2019-10-08T09-47-14-subset.csv';
+	'https://gist.githubusercontent.com/curran/470752f12c027f8ff4266e7c96f26a56/raw/66908b56e371e7c9f5a1c0911ac3250f570a4c83/share-of-population-infected-with-hiv-ihme.csv';
 
 export const useData = () => {
 	const [data, setData] = useState(null);
@@ -14,12 +15,8 @@ export const useData = () => {
 	//lat: "35.685" lng: '139.7514';
 	const row = d => {
 		// there is no way to know that the data is
-		d.cords = d['Location Coordinates']
-			.split(',')
-			.map(d => Number(d))
-			.reverse();
-		d['Total Dead and Missing'] = Number(d['Total Dead and Missing']);
-		d['Reported Date'] = new Date(d['Reported Date']);
+		d.aids =
+			d['Prevalence - HIV/AIDS - Sex: Both - Age: 15-49 years (Percent) (%)'];
 		return d;
 	};
 

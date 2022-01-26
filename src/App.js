@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import PieArc from './components/pieArc/arc';
+// import PieArc from './components/pieArc/arc';
 import Face from './components/face/face';
 import Load from './components/loadeDataExample/dataExample';
 import BarChart from './components/barChart/barChart';
@@ -14,7 +14,7 @@ import PointsOnAMapMissingMigrants from './components/pointsOnAMapMissingMigrant
 import ScrubberMap from './components/scrubberMap/scrubberMap';
 import ScrubberMapWithBrushing from './components/scrubberMapWithBrushing/scrubberMapWithBrushing.js';
 import ScatterPlotLogScale from './components/scatterPlotLogScale';
-import ChloroplethMapMissingMigrants from './components/choroplethMapMissingMigrants/pointsOnAMap';
+import ChloroplethMapHIVAIDS from './components/choroplethMapHIVAIDS/ChoroplethMapHIVAIDS';
 
 import styled from 'styled-components';
 
@@ -29,7 +29,7 @@ const App = () => {
 				<div>{/* <SelectScatter /> */}</div>
 			</FlexColumn>
 			<FlexCenter>
-				{/* <ChloroplethMapMissingMigrants /> */}
+				<ChloroplethMapHIVAIDS />
 				{/* <ScatterPlotLogScale /> */}
 				{/* <ScrubberMapWithBrushing /> */}
 				{/* <ScrubberMap /> */}
@@ -37,7 +37,7 @@ const App = () => {
 				{/* <WorkingWithTime /> */}
 				{/* <PointsOnAMap /> */}
 				{/* <GeoChart /> */}
-				<LineChart />
+				{/* <LineChart /> */}
 				{/* <BarChart /> */}
 				{/* <ScatterPlot /> */}
 				{/* <PieArc /> */}
