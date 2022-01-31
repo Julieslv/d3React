@@ -6,7 +6,7 @@ export const AxisLeft = ({
 	tickOffset = 3,
 	gridStrokeColour,
 }) =>
-	yScale.ticks().map((tickValue) => (
+	yScale.ticks().map(tickValue => (
 		<g
 			key={tickValue}
 			className='tick'

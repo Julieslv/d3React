@@ -91,7 +91,7 @@ const TextEl = styled.text`
 	fill: rgba(155, 0, 0, 0.2);
 	font-size: 2em;
 	font-weight: 700;
-	text-anchor: middle;
+	textanchor: middle;
 `;
 
 export default ScatterPlot;
