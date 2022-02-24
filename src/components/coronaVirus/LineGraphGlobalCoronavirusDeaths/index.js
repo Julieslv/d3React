@@ -11,7 +11,7 @@ const GlobalCoronavirusDeaths = () => {
 	return data ? (
 		<LineChart data={data} width={width} height={height} />
 	) : (
-		<div>Loading...</div>
+		<Loading />
 	);
 };
 

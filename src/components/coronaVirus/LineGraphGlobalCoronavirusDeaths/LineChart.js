@@ -34,7 +34,7 @@ export const LineChart = ({ data, width, height }) => {
 			<g transform={`translate(${margin.left},${margin.top})`}>
 				<XAxis xScale={xScale} innerHeight={innerHeight} />
 				<path d={lineGenerator(data)} />
-				<YMarkerLine value={10000} yScale={yScale} innerWidth={innerWidth} />
+				<YMarkerLine value={1500000} yScale={yScale} innerWidth={innerWidth} />
 				<XMarkerLine
 					value={mostRecentDate}
 					label={formatDate(mostRecentDate)}

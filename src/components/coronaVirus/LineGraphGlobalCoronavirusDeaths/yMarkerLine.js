@@ -1,11 +1,11 @@
+import styled from 'styled-components';
 export const YMarkerLine = ({ value, yScale, innerWidth }) => {
 	const markerLineY = yScale(value);
 	const markerLineX1 = 0;
 	const markerLineX2 = innerWidth;
 	return (
 		<>
-			<line
-				className='marker-line'
+			<MarkerLineEl
 				x1={markerLineX1}
 				y1={markerLineY}
 				x2={markerLineX2}
@@ -16,8 +16,14 @@ export const YMarkerLine = ({ value, yScale, innerWidth }) => {
 				alignmentBaseline='middle'
 				x={markerLineX1 - 8}
 				y={markerLineY}>
-				{'10,000'}
+				{value}
 			</text>
 		</>
 	);
 };
+
+const MarkerLineEl = styled.line`
+	/* stroke: 10px; */
+	stroke: red;
+	stroke-width: 2px;
+`;
