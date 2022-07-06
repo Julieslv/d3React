@@ -1,20 +1,20 @@
 import { useEffect } from 'react';
-import { scaleTime, extent, scaleLinear, max, line, timeFormat } from 'd3';
-import { YMarkerLine } from './yMarkerLine';
-import { XMarkerLine } from './xMarkerLine';
+import { scaleTime, extent, scaleLog, max, line, timeFormat } from 'd3';
 import { XAxis } from './xAxis';
+import { YAxis } from './yAxis';
 
 const xValue = d => d.date;
 const yValue = d => d.deathTotal;
 
 import styled from 'styled-components';
-const margin = { top: 40, right: 80, bottom: 80, left: 150 };
+const margin = { top: 80, right: 80, bottom: 80, left: 150 };
+const threshold = 1500000;
 
 const formatDate = timeFormat('%b %d');
 
 export const LineChart = ({ data, width, height }) => {
 	useEffect(() => {
-		document.title = 'Corona Virus Linear scale';
+		document.title = 'Corona Virus Log scale';
 	}, []);
 	const innerWidth = width - margin.left - margin.right;
 	const innerHeight = height - margin.top - margin.bottom;
@@ -23,8 +23,8 @@ export const LineChart = ({ data, width, height }) => {
 		.domain(extent(data, xValue))
 		.range([0, innerWidth]);
 
-	const yScale = scaleLinear()
-		.domain([0, max(data, yValue)])
+	const yScale = scaleLog()
+		.domain([1, max(data, yValue)]) // log scales can't start at 0
 		.range([innerHeight, 0]);
 
 	const lineGenerator = line()
@@ -35,22 +35,33 @@ export const LineChart = ({ data, width, height }) => {
 
 	return (
 		<>
-			<h1>Corona Virus Linear scale</h1>
+			<text>Some stuff here I can't remember</text>
+			<h1>Corona Virus Log scale</h1>
 			<SVGEl width={width} height={height}>
 				<g transform={`translate(${margin.left},${margin.top})`}>
 					<XAxis xScale={xScale} innerHeight={innerHeight} />
+					<YAxis yScale={yScale} innerWidth={innerWidth} />
 					<path d={lineGenerator(data)} />
-					<YMarkerLine
-						value={1500000}
-						yScale={yScale}
-						innerWidth={innerWidth}
-					/>
-					<XMarkerLine
-						value={mostRecentDate}
-						label={formatDate(mostRecentDate)}
-						xScale={xScale}
-						innerHeight={innerHeight}
-					/>
+					<text transform={`translate(0, ${-margin.top / 2})`}>
+						Global Coronavirus over time
+					</text>
+					<text
+						className='axis-label'
+						textAnchor='middle'
+						transform={`translate(-${margin.left / 2}, ${
+							innerHeight / 2
+						}) rotate(90)`}>
+						Cumulative Deaths
+					</text>
+					<text
+						className='axis-label'
+						textAnchor='middle'
+						// alignmentBaseline='hanging'
+						transform={`translate(${innerWidth / 2}, ${
+							innerHeight + margin.bottom
+						})`}>
+						Time
+					</text>
 				</g>
 			</SVGEl>
 		</>
@@ -69,6 +80,10 @@ const SVGEl = styled.svg`
 	}
 	text {
 		font-size: 2em;
+		&.axis-label {
+			fill: red;
+			font-size: 1.3rem;
+		}
 	}
 	.domain {
 		display: none;

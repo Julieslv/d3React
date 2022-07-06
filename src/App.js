@@ -16,7 +16,8 @@ import React, { useEffect } from 'react';
 // import ScatterPlotLogScale from './components/scatterPlotLogScale';
 // import ChloroplethMapHIVAIDS from './components/choroplethMapHIVAIDS/ChoroplethMapHIVAIDS';
 
-import GlobalCoronavirusDeaths from './components/coronaVirus/LineGraphGlobalCoronavirusDeaths';
+// import GlobalCoronavirusDeaths from './components/coronaVirus/LineGraphGlobalCoronavirusDeaths';
+import GlobalCoronavirusDeaths from './components/coronaVirus/LineGraphGlobalCoronavirusDeathsLogScale';
 
 import styled from 'styled-components';
 
